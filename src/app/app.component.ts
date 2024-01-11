@@ -11,4 +11,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'OrderGenerator';
+
+  onSellClickHandler() {
+    console.log("sell!");
+  }
 }
