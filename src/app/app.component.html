@@ -1,33 +1,33 @@
 <h1 class="mb-4">OrderGenerator: Gerador de Ordens</h1>
 <ul class="nav nav-tabs nav-pills justify-content-center">
   <li class="nav-item">
-    <button class="nav-link active">Compra</button>
+    <button [ngClass]="isBuyOrder? 'nav-link active' : 'nav-link'" (click)="onBuyClickHandler()">Compra</button>
   </li>
   <li class="nav-item">
-    <button class="nav-link" (click)="onSellClickHandler()">Venda</button>
+    <button [ngClass]="isBuyOrder? 'nav-link' : 'nav-link active bg-danger'" (click)="onSellClickHandler()">Venda</button>
   </li>
 </ul>
 <div class="order d-flex justify-content-center">
-  <form class="order-form col-4 pt-5">
+  <form class="order-form pt-4 pb-2" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
 
-    <select class="form-select mb-3" aria-label="stock-name">
+    <select class="form-select mb-3 stock-input" aria-label="stock-name" formControlName="stockName">
       <option value="PETR4">PETR4</option>
       <option value="VALE3">VALE3</option>
       <option value="VIIA4">VIIA4</option>
     </select>
 
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 quantity-input-group">
       <span class="input-group-text">Quantidade</span>
-      <input type="number" class="form-control" min="0" max="100000" aria-label="quantity" required>
+      <input type="number" class="form-control" min="0" max="100000" aria-label="quantity" formControlName="quantity" required>
     </div>
 
-    <div class="input-group mb-5">
+    <div class="input-group mb-5 price-input-group">
       <span class="input-group-text">R$</span>
-      <input type="number" class="form-control" min="0.01" step=".01" max="1000" aria-label="price" required>
+      <input type="number" class="form-control" min="0.01" step=".01" max="1000" aria-label="price" formControlName="price" required>
     </div>
 
     <div class="input-group mb-3 justify-content-center">
-      <button type="submit" class="btn btn-primary">Comprar</button>
+      <button type="submit" [disabled]="!orderForm.valid" [ngClass]="isBuyOrder? 'btn btn-primary' : 'btn btn-danger'">{{isBuyOrder? 'Comprar' : 'Vender'}}</button>
     </div>
 
   </form>
