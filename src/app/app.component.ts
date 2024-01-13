@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import { OrderAccumulatorService } from '../services/order-accumulator.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,7 +22,15 @@ export class AppComponent {
     price: ['', Validators.required],
   });
 
-  constructor(private formBuilder : FormBuilder) {}
+  constructor(
+    private formBuilder : FormBuilder,
+    private orderAccumulatorService : OrderAccumulatorService
+  ) {}
+
+  ngOnInit(): void {
+    let test = this.orderAccumulatorService.getAllOrders();
+    console.log(test);
+  }
 
   onBuyClickHandler() {
     this.isBuyOrder = true;
