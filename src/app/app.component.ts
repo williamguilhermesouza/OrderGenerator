@@ -13,6 +13,6 @@ export class AppComponent {
   title = 'OrderGenerator';
 
   onSellClickHandler() {
-    console.log("sell!");
+    console.log('clicked!');
   }
 }
