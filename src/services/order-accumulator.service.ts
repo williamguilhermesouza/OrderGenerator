@@ -3,19 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Order } from '../interfaces/order';
+import { NewOrderResponse } from '../interfaces/new-order-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderAccumulatorService {
-  private apiUrl = 'localhost:4000';
+  private apiUrl = 'http://localhost:5279/api/Order';
 
   constructor(private http: HttpClient) { }
 
-  //Observable<Order[]> in return type
-  getAllOrders(): string {
-    //let order = this.http.get<Order[]>(this.apiUrl);
-    let order = "test api inject";
+  getAllOrders(): Observable<Order[]> {
+    let order = this.http.get<Order[]>(this.apiUrl);
     return order;
+  }
+
+  newOrder(order: Order): Observable<NewOrderResponse> {
+    return this.http.post<NewOrderResponse>(this.apiUrl, order);
   }
 }

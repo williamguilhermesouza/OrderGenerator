@@ -4,7 +4,6 @@
 
 .order {
   max-width: 400px;
-  background: linear-gradient(150deg, rgba(187,187,187,1) 58%, rgba(255,255,255,1) 100%);
   margin: auto;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

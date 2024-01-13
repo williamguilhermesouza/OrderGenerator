@@ -4,6 +4,9 @@ import { RouterOutlet } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { OrderAccumulatorService } from '../services/order-accumulator.service';
+import { Observable } from 'rxjs';
+import { Order } from '../interfaces/order';
+import { NewOrderResponse } from '../interfaces/new-order-response';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +18,8 @@ import { OrderAccumulatorService } from '../services/order-accumulator.service';
 export class AppComponent {
   title = 'OrderGenerator';
   isBuyOrder: boolean = true;
+  ordersHistory?: Order[];
+  newOrderResponse?: NewOrderResponse;
 
   orderForm = this.formBuilder.group({
     stockName: ['PETR4', Validators.required],
@@ -28,8 +33,10 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    let test = this.orderAccumulatorService.getAllOrders();
-    console.log(test);
+    this.orderAccumulatorService.getAllOrders().subscribe(res => {
+      this.ordersHistory = res;
+    });
+
   }
 
   onBuyClickHandler() {
@@ -41,6 +48,15 @@ export class AppComponent {
   }
 
   onSubmit() {
-    alert(`ativo: ${this.orderForm.value.stockName}, quantidade: ${this.orderForm.value.quantity}, preço: ${this.orderForm.value.price}`);
+    let newOrder: Order = {
+      ativo: <string>this.orderForm.value.stockName,
+      lado: this.isBuyOrder? "C" : "V",
+      quantidade: Number(this.orderForm.value.quantity),
+      preco: Number(this.orderForm.value.price),
+    }
+    this.orderAccumulatorService.newOrder(newOrder).subscribe( res => {
+      this.newOrderResponse = res;
+    });
+    console.log(this.ordersHistory);
   }
 }

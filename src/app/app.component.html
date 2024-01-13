@@ -27,8 +27,35 @@
     </div>
 
     <div class="input-group mb-3 justify-content-center">
-      <button type="submit" [disabled]="!orderForm.valid" [ngClass]="isBuyOrder? 'btn btn-primary' : 'btn btn-danger'">{{isBuyOrder? 'Comprar' : 'Vender'}}</button>
+      <button type="submit" [disabled]="!orderForm.valid" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" [ngClass]="isBuyOrder? 'btn btn-primary' : 'btn btn-danger'">{{isBuyOrder? 'Comprar' : 'Vender'}}</button>
     </div>
 
   </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{newOrderResponse?.sucesso ? 'Sucesso!' : 'Erro'}}</h5>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="newOrderResponse?.sucesso">
+          Ordem executada com sucesso! Veja abaixo a resposta da requisição:
+        </div>
+        <div *ngIf="!newOrderResponse?.sucesso">
+          Falha ao executar a ordem. Veja abaixo a resposta da requisição:
+        </div>
+        <div class="response text-center">
+          <p><span>sucesso: </span><code>{{newOrderResponse? newOrderResponse.sucesso : ''}}</code></p>
+          <p><span>exposicao_atual: </span><code>{{newOrderResponse? newOrderResponse.exposicao_atual : ''}}</code></p>
+          <p><span>msg_erro: </span><code>{{newOrderResponse? newOrderResponse.msg_erro : ''}}</code></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
 </div>
