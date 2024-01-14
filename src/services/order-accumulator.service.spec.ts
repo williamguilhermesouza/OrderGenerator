@@ -24,15 +24,6 @@ describe('OrderAccumulatorService', () => {
     preco: 1.0,
   };
 
-  const invalidHugeOrder: Order = {
-    ativo: "PETR4",
-    lado: "C",
-    quantidade: 1000000000000,
-    preco: 1000000000.0,
-  };
-
-  const invalidObj = {};
-
   const okResponse: NewOrderResponse = {
     sucesso: true,
     exposicao_atual: 100,
@@ -43,15 +34,41 @@ describe('OrderAccumulatorService', () => {
     TestBed.configureTestingModule({});
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
     service = new OrderAccumulatorService(httpClientSpy);
+
+    // mocking post return
+    httpClientSpy.post.and.returnValue(of(okResponse));
+
+    // mocking getAll return
+    httpClientSpy.get.and.returnValue(of([validBuyOrder, validBuyOrder, validBuyOrder]));
   });
 
   it('Test valid buy request', (done: DoneFn) => {
 
-    httpClientSpy.post.and.returnValue(of(okResponse));
+    service.newOrder(validBuyOrder).subscribe({
+      next: (response) => {
+        expect(response).withContext('expected response').toEqual(okResponse);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('Test valid buy request', (done: DoneFn) => {
 
     service.newOrder(validBuyOrder).subscribe({
       next: (response) => {
         expect(response).withContext('expected response').toEqual(okResponse);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('Test valid getAll request', (done: DoneFn) => {
+
+    service.getAllOrders().subscribe({
+      next: (response) => {
+        expect(response).withContext('expected response').toEqual([validBuyOrder, validBuyOrder, validBuyOrder]);
         done();
       },
       error: done.fail,

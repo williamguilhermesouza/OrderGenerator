@@ -29,4 +29,6 @@ The main src folder is home for configuration files.
 
 ## Tests
 
-All the tests are located near the code they're testing, they're identified by the .spec.ts extension.
+All the tests are located near the code they're testing, they're identified by the .spec.ts extension. To run use:
+
+> ng test

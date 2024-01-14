@@ -1,15 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
 
-import { OrderAccumulatorService } from '../services/order-accumulator.service';
+import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 describe('AppComponent', () => {
-  let orderServiceSpy: jasmine.SpyObj<OrderAccumulatorService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent, HttpClientModule],
     }).compileComponents();
   });
 
@@ -30,9 +29,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, OrderGenerator');
+    expect(compiled.querySelector('h1')?.textContent).toContain('OrderGenerator: Gerador de Ordens');
   });
-
-  // specific tests
 
 });
