@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { OrderAccumulatorService } from '../services/order-accumulator.service';
-import { Observable } from 'rxjs';
 import { Order } from '../interfaces/order';
 import { NewOrderResponse } from '../interfaces/new-order-response';
 
