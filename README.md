@@ -1,5 +1,7 @@
 # OrderGenerator
 
+![order-generator](https://github.com/williamguilhermesouza/OrderGenerator/)
+
 A angular frontend to the Order Accumulator API, that was built using C#.
 
 ## How to run
