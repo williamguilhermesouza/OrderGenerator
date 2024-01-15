@@ -1,0 +1,77 @@
+<div class="history text-center mt-4">
+  <h2 class="mb-4">Histórico de Ordens</h2>
+  <div id="carouselOrders" class="carousel slide d-flex justify-content-around align-items-center">
+
+    <button class="carousel-control-prev me-4" type="button" data-bs-target="#carouselOrders" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <div class="row justify-content-center">
+
+          <div class="card col-3 mx-2" *ngFor="let activeOrders of carouselActive; let i = index;">
+            <div class="card-body">
+              <h5 class="card-title">{{activeOrders.ativo}}</h5>
+              <ul class="list-group list-group-flush">
+                <li>{{activeOrders.lado == "C"? "Compra" : "Venda"}}</li>
+                <li><span>Qtd:</span>{{activeOrders.quantidade}}</li>
+                <li><span>R$</span>{{activeOrders.preco.toFixed(2)}}</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <ng-container *ngFor="let order of slicedOrders;">
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+
+            <div class="card col-3 mx-2">
+              <div class="card-body">
+                <h5 class="card-title">{{order[0].ativo}}</h5>
+                <ul class="list-group list-group-flush">
+                  <li>{{order[0].lado == "C"? "Compra" : "Venda"}}</li>
+                  <li><span>Qtd:</span>{{order[0].quantidade}}</li>
+                  <li><span>R$</span>{{order[0].preco.toFixed(2)}}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-3 mx-2">
+              <div class="card-body">
+                <h5 class="card-title">{{order[1].ativo}}</h5>
+                <ul class="list-group list-group-flush">
+                  <li>{{order[1].lado == "C"? "Compra" : "Venda"}}</li>
+                  <li><span>Qtd:</span>{{order[1].quantidade}}</li>
+                  <li><span>R$</span>{{order[1].preco.toFixed(2)}}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card col-3 mx-2">
+              <div class="card-body">
+                <h5 class="card-title">{{order[2].ativo}}</h5>
+                <ul class="list-group list-group-flush">
+                  <li>{{order[2].lado == "C"? "Compra" : "Venda"}}</li>
+                  <li><span>Qtd:</span>{{order[2].quantidade}}</li>
+                  <li><span>R$</span>{{order[2].preco.toFixed(2)}}</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselOrders" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<h1 class="mb-4">OrderGenerator: Gerador de Ordens</h1>
+<h1 class="mb-4 text-center">OrderGenerator: Gerador de Ordens</h1>
 <ul class="nav nav-tabs nav-pills justify-content-center">
   <li class="nav-item">
     <button [ngClass]="isBuyOrder? 'nav-link active' : 'nav-link'" (click)="onBuyClickHandler()">Compra</button>
@@ -32,6 +32,8 @@
 
   </form>
 </div>
+
+<app-order-history />
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
