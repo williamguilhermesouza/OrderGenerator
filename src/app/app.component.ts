@@ -56,6 +56,5 @@ export class AppComponent {
     this.orderAccumulatorService.newOrder(newOrder).subscribe( res => {
       this.newOrderResponse = res;
     });
-    console.log(this.ordersHistory);
   }
 }
