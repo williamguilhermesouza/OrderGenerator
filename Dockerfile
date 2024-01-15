@@ -12,17 +12,8 @@ COPY ./ /usr/local/app/
 # Install all the dependencies
 RUN npm install
 
-# Generate the build of the application
-RUN npm run build
-
-
-# Stage 2: Serve app with nginx server
-
-# Use official nginx image as the base image
-FROM nginx:latest
-
-# Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/order-generator /usr/share/nginx/html
+# Install Angular
+RUN npm install -g @angular/cli
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 4200

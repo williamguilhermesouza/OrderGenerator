@@ -21,6 +21,16 @@ Then run the frontend using npm start script:
 
 > npm run start
 
+Also, you can run a docker container of the app, build the dockerimage with:
+
+> docker build -t ordergenerator .
+
+And run with:
+
+> docker-compose up
+
+Remember to change the apiUrl in order accumulator service under services folder, to reflect your backend host.
+
 ## Structure
 
 The project was built on a single page, using Angular js framework. All the html, tests and components are under app folder.
