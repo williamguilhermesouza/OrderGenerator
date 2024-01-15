@@ -6,18 +6,19 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OrderAccumulatorService } from '../services/order-accumulator.service';
 import { Order } from '../interfaces/order';
 import { NewOrderResponse } from '../interfaces/new-order-response';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
+  imports: [CommonModule, RouterOutlet, ReactiveFormsModule, OrderHistoryComponent],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'OrderGenerator';
   isBuyOrder: boolean = true;
-  ordersHistory?: Order[];
   newOrderResponse?: NewOrderResponse;
 
   orderForm = this.formBuilder.group({
@@ -30,13 +31,6 @@ export class AppComponent {
     private formBuilder : FormBuilder,
     private orderAccumulatorService : OrderAccumulatorService
   ) {}
-
-  ngOnInit(): void {
-    this.orderAccumulatorService.getAllOrders().subscribe(res => {
-      this.ordersHistory = res;
-    });
-
-  }
 
   onBuyClickHandler() {
     this.isBuyOrder = true;
